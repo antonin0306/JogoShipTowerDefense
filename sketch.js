@@ -7,6 +7,7 @@ var fundoImg;
 var torre;
 var torreImg;
 var canhao;
+var bolas = []
 
 
 function preload() {
@@ -28,12 +29,13 @@ function setup() {
   torre = Bodies.rectangle(160,350,160,310,options);
   World.add(world,torre);
   canhao = new Canhao (180,110,130,100,20)
+  boladecanhao= new BolaDeCanhao (canhao.x,canhao.y)
 }
 
 function draw() {
   background(189);
   Engine.update(engine);
-  
+  angleMode(DEGREES)
   //rect(ground.position.x, ground.position.y,width*2,1);
   image (fundoImg,0,0,1200,600)
   push()
@@ -41,4 +43,23 @@ function draw() {
   image(torreImg,torre.position.x,torre.position.y,160,310)
   pop()
   canhao.show()
+  for (var i = 0; i<bolas.length; i++) {
+mostrarB(bolas[i])
+  }
+}
+function keyReleased () {
+if (keyCode==DOWN_ARROW) {
+  bolas[bolas.length-1].throw()
+}
+}
+function keyPressed () {
+  if (keyCode==DOWN_ARROW) {
+    var bola = new BolaDeCanhao (canhao.x, canhao.y)
+    bolas.push (bola)
+  }
+}
+function mostrarB (ball) {
+if (ball) {
+ball.display()
+}
 }

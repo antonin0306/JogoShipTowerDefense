@@ -9,6 +9,12 @@ class Canhao {
         this.canhao = loadImage ("assets/canon.png")
     }
     show () {
+        if (keyIsDown (RIGHT_ARROW)&&this.a<70) {
+            this.a += 1
+        }
+        if (keyIsDown (LEFT_ARROW)&&this.a>-30) {
+            this.a -= 1
+        }
         push()
         translate(this.x,this.y)
         rotate(this.a)
